@@ -1,0 +1,189 @@
+// Dota2 Editor
+// Get latest version: https://github.com/zombieJ/nw-dota2editor
+
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+	// =================================================================================================================
+	// Templar Assassin: Refraction Holdout
+	// =================================================================================================================
+	"templar_assassin_refraction_holdout"
+	{
+		// General
+		// -------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_PHYSICAL"
+		// Casting
+		// -------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"	"0.0 0.0 0.0 0.0"
+		// Time
+		// -------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"	"17.0 17.0 17.0 17.0"
+		// Cost
+		// -------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"	"100"
+		"precache"
+		{
+			"particle"	"particles\units\heroes\hero_ogre_magi\ogre_magi_fireblast.vpcf"
+			"particle"	"particles\units\heroes\hero_ogre_magi\ogre_magi_fireblast_cast.vpcf"
+			"particle"	"particles\generic_gameplay\generic_stunned.vpcf"
+			"soundfile"	"soundevents\test_custom_sound.vsndevts"
+		}
+		"OnSpellStart"	{}
+		"Modifiers"
+		{
+			"modifier_templar_assassin_refraction_holdout"	{}
+		}
+		// Special
+		// -------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"damage_absorb"	"200 300 400 500"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"bonus_damage"	"20 40 60 80"
+			}
+			"03"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"duration"	"17.0 17.0 17.0 17.0"
+			}
+		}
+	}
+
+	"ability_test01"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"icon_00"
+		"ScriptFile"	"skills\ability_test01"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"MaxLevel"	"4"
+		"AbilityCooldown"	"10"
+		"AbilityManaCost"	"100"
+		"AbilityCastRange"	"500"
+		"precache"
+		{
+			"particle"	"particles\units\heroes\hero_ogre_magi\ogre_magi_fireblast.vpcf"
+			"particle"	"particles\units\heroes\hero_ogre_magi\ogre_magi_fireblast_cast.vpcf"
+			"particle"	"particles\generic_gameplay\generic_stunned.vpcf"
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"damage"	"50 100 150 200"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"stun_time"	"1 2 3 4"
+			}
+		}
+	}
+
+	"ability_mofajian"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"vengefulspirit_magic_missile"
+		"ScriptFile"	"skills\ability_mofajian"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"MaxLevel"	"4"
+		"AbilityCastPoint"	"0.3"
+		"AbilityCastAnimation"	"ACT_DOTA_ATTACK"
+		"AbilityCooldown"	"9"
+		"AbilityManaCost"	"100"
+		"AbilityCastRange"	"500"
+		"precache"
+		{
+			"particle"	"particles\units\heroes\hero_vengeful\vengeful_magic_missle_projectile.vpcf"
+		}
+	}
+
+	"ability_hit"
+	{
+		"BaseClass"	"ability_datadriven"
+		"AbilityTextureName"	"vengefulspirit_magic_missile"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"MaxLevel"	"1"
+		"AbilityCastPoint"	"0.1"
+		"AbilityCastAnimation"	"ACT_DOTA_ATTACK"
+		"AbilityCooldown"	"1.5"
+		"AbilityManaCost"	"0"
+		"AbilityCastRange"	"600"
+		"precache"
+		{
+			"particle"	"particles\econ\items\vengeful\vs_ti8_immortal_shoulder\vs_ti8_immortal_magic_missle.vpcf"
+		}
+		"OnSpellStart"
+		{
+			"TrackingProjectile"
+			{
+				"Target"	"TARGET"
+				"ProvidesVision"	"1"
+				"MoveSpeed"	"900"
+				"EffectName"	"particles\econ\items\vengeful\vs_ti8_immortal_shoulder\vs_ti8_immortal_magic_missle.vpcf"
+			}
+		}
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"	"1"
+			"Damage"
+			{
+				"Target"	"TARGET"
+				"Type"	"DAMAGE_TYPE_PURE"
+				"Damage"	"100"
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"Damage"	"100"
+			}
+		}
+	}
+
+	// 旋转旋转
+	"ability_rotate"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"icon_00"
+		"ScriptFile"	"skills/ability_rotate"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"MaxLevel"	"1"
+		"AbilityCastPoint"	"0"
+		"AbilityCastAnimation"	"None"
+		"AbilityCooldown"	"0.5"
+		"AbilityManaCost"	"0"
+		"AbilityCastRange"	"99999"
+	}
+
+	"ability_rand_01"
+	{
+		"BaseClass"	"ability_lua"
+		"AbilityTextureName"	"icon_00"
+		"ScriptFile"	"skills/ability_rand_01"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_NONE"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"MaxLevel"	"1"
+		"AbilityCooldown"	"1000"
+		"AbilityManaCost"	"0"
+	}
+}
